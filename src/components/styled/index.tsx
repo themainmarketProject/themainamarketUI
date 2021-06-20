@@ -134,7 +134,11 @@ export const Form = styled.div`
   }
 
   .address,
-  .password {
+  .password,
+  .gender,
+  .lastname,
+  .firstname,
+  .confirm-password {
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 1.125px;
@@ -153,7 +157,8 @@ export const Form = styled.div`
   }
 
   input,
-  button {
+  button,
+  select {
     width: 100%;
     height: 45px;
     outline: none;
