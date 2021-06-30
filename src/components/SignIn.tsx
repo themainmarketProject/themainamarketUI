@@ -25,7 +25,7 @@ const SignIn = () => {
      };
 
      fetch(url, requestOptions)
-       .then((response) => console.log("Submitted successfully"))
+       .then((response) => console.log(response))
        .catch((error) => console.log("Form submit error", error));
      resetForm();
    }

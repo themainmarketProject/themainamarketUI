@@ -26,7 +26,7 @@ class FaceBook extends Component<MyProps, MyState> {
              };
         }
         console.log(pstData)
-        postData('signup', pstData).then((result: any) => {
+        postData(type, pstData).then((result: any) => {
             let responseJson = result;
             if (responseJson.userData) {
                 sessionStorage.setItem('userData', JSON.stringify(responseJson));

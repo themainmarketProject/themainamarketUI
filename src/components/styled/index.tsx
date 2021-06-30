@@ -83,6 +83,7 @@ export const CenterPosition = css`
   background: #fff;
   padding: 50px 50px;
   min-width: 32%;
+  max-width: 100%;
 `;
 
 export const Form = styled.div`

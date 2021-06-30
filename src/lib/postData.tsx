@@ -1,4 +1,5 @@
 export function postData(type: string, userData: unknown) {
+    
     let url = `http://mainmarketapi.herokuapp.com/api/Auth/${type}-external-login`;
     console.log(userData);
 
@@ -10,6 +11,7 @@ export function postData(type: string, userData: unknown) {
         })
             .then((response) => response.json())
             .then((res) => {
+                console.log(res)
                 resolve(res);
             })
             .catch((err) => {
