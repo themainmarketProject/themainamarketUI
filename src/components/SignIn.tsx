@@ -17,7 +17,6 @@ const SignIn = () => {
      console.log(inputs);
      const url = "http://mainmarketapi.herokuapp.com/api/Auth/login";
 
-
      const requestOptions = {
        method: "POST",
        headers: { "Content-Type": "application/json" },
@@ -25,7 +24,12 @@ const SignIn = () => {
      };
 
      fetch(url, requestOptions)
-       .then((response) => console.log(response))
+       .then((response) => response.json())
+       .then((res) => {
+         localStorage.setItem('myToken', res.data.token);
+         localStorage.setItem('userId', res.data.userId);
+         window.location.assign('/');
+        })
        .catch((error) => console.log("Form submit error", error));
      resetForm();
    }

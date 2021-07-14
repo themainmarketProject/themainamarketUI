@@ -42,31 +42,29 @@ export const SideBarData = [
     title: "Recently Viewed",
     icon: <HistoryOutlinedIcon />,
     link: "/recently-viewed",
-  },
-//   {
-//     title: "Details",
-//     // icon: <Icon />,
-//     link: "/",
-//   },
-//   {
-//     title: "Address Book",
-//     // icon: <Icon />,
-//     link: "/",
-//   },
-//   {
-//     title: "Change Password",
-//     // icon: <Icon />,
-//     link: "/",
-//   },
-//   {
-//     title: "Newsletter Preferences",
-//     // icon: <Icon />,
-//     link: "/",
-//   },
-//   {
-//     title: "LOG OUT",
-//     // icon: <Icon />,
-//     link: "/",
-//   },
+  }
 ];
+
+export const restSideBarData = [
+  {
+    title: "Details",
+    link: "/",
+  },
+  {
+    title: "Address Book",
+    link: "/",
+  },
+  {
+    title: "Change Password",
+    link: "/",
+  },
+  {
+    title: "Newsletter Preferences",
+    link: "/",
+  },
+  {
+    title: "LOG OUT",
+    link: "/",
+  },
+]
 

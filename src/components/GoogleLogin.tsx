@@ -10,30 +10,30 @@ interface MyState {
 }
 
 class Googlelogin extends Component <MyProps, MyState> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            redirectToReferrer: false,
-        };
-    }
+  constructor(props: any) {
+      super(props);
+      this.state = {
+          redirectToReferrer: false,
+      };
+  }
 
-    signup = (res: any, type: string) => {
-        let pstData;
+  signup = (res: any, type: string) => {
+      let pstData;
 
-        if (type === "google" && res.profileObj) {
-            pstData = {
-                token: res.tokenId,
-            };
+      if (type === "google" && res.profileObj) {
+          pstData = {
+              token: res.tokenId,
+          };
+      }
+      console.log(pstData);
+      postData(type, pstData).then((result: any) => {
+        let responseJson = result;
+        if (responseJson.userData) {
+          sessionStorage.setItem("userData", JSON.stringify(responseJson));
+          this.setState({ redirectToReferrer: true });
         }
-        console.log(pstData);
-        postData(type, pstData).then((result: any) => {
-          let responseJson = result;
-          if (responseJson.userData) {
-            sessionStorage.setItem("userData", JSON.stringify(responseJson));
-            this.setState({ redirectToReferrer: true });
-          }
-        });
-    };
+      });
+  };
 
     render() {
         if (this.state.redirectToReferrer) {
