@@ -12,4 +12,5 @@
   text-decoration: inherit;
   text-transform: uppercase;
   outline: none;
+  cursor: pointer;
 }

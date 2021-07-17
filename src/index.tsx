@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const client = new ApolloClient({
-  uri: "http://themainmarket.herokuapp.com/graphql/",
+  uri: "http://mainmarketapi.herokuapp.com/graphql/",
   cache: new InMemoryCache(),
 });
 

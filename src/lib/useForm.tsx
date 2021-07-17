@@ -3,14 +3,19 @@ import { match } from "react-router-dom";
 import { confirm_password } from './confirmPassWord';
 
 interface Input {
-  email?: string,
-  firstName?: string,
-  lastName?: string,
-  gender?: string,
-  password?: string,
-  confirmPassword?: string,
-  error?: boolean,
-  message?: string,
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
+  password?: string;
+  confirmPassword?: string;
+  error?: boolean;
+  message?: string;
+  houseNumber?: string;
+  streetName?: string;
+  city?: string;
+  state?: string;
+  country?: string;
 }
 
 export default function useForm(initial: Input) {

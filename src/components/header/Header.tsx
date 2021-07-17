@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
 import DropDownProduct from "../dropDownProducts";
 import SearchIcon from '@material-ui/icons/Search';
+import logo from '../../images/logo2.jpeg';
 import './Header.css';
 
 function Header() {
@@ -11,7 +12,7 @@ function Header() {
       <section className="header-top">
         <section className="header-top-logo">
           <a href="/" className="header-logo">
-            LOGO
+            <img src={logo} alt="logo" style={{width: "100%", height: "130%"}} />
           </a>
         </section>
         <section className="header-top__navbar">

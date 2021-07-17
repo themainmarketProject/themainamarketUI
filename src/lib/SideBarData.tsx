@@ -52,11 +52,11 @@ export const restSideBarData = [
   },
   {
     title: "Address Book",
-    link: "/",
+    link: "/address-book",
   },
   {
     title: "Change Password",
-    link: "/",
+    link: "/change-password",
   },
   {
     title: "Newsletter Preferences",

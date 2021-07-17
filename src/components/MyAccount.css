@@ -1,0 +1,49 @@
+.content {
+    display: flex;
+}
+
+.body {
+    background-color: rgba(76, 141, 235, 0.10077);
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.section {
+    width: 30vw;
+    height: 40vh;
+    margin: 10px;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+.separator {
+    margin: 10px 0;
+}
+
+.mail {
+    color: blue;
+}
+
+h3 {
+    padding: 10px
+}
+
+.change_password {
+    text-decoration: none;
+    color: #2f4050;
+    width: 50%;
+    padding: 10px 0;
+}
+
+.change_password:hover {
+    color: brown;
+    background-color: #eeebf4;
+}

@@ -5,6 +5,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import ForgotPassword from './components/ForgotPassword';
 import MyAccount from './components/MyAccount';
+import AddressBook from './components/AddressBook';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signin" component={SignIn} />
         <Route path="/my-account" component={MyAccount}/>
         <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/address-book" component={AddressBook} />
       </Router>
     </>
   );

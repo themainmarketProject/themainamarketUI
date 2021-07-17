@@ -3,11 +3,34 @@ import { withStyles } from '@material-ui/core/styles';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { SideBarData } from '../lib/SideBarData';
+import { useQuery } from '@apollo/client';
+import gql from 'graphql-tag';
+
+const GET_CATEGORIES = gql`
+  query {
+      categories{
+          id,
+          name,
+          subCategories{
+              name,
+              id
+        }
+    }
+}`;
+
+interface Category {
+    id: string,
+    name: string,
+    subCategories: [
+        id: string,
+        name: string,
+    ]
+}
 
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
+    padding: '1rem',
   },
 })((props: MenuProps) => (
   <Menu
@@ -37,43 +60,57 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function DropDownProduct () {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const { loading, error, data } = useQuery(GET_CATEGORIES);
+    console.log(data);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    // if (loading) return <Loader />;
+  
+    if (error) return <p>An error occured!</p>;
+
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+    };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  return (
-    <div>
-      <div
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        className="header-bottom__product"
-      >
-        Products
-      </div>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-          <div className="flex_product">
-        {SideBarData.map(menu => {
-            return <StyledMenuItem
-            onClick={() => { window.location.pathname = menu.link }}
-            >
-                <ListItemText primary='option1' />
-          </StyledMenuItem>
-        })}
+    return (
+        <div>
+        <div
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+            className="header-bottom__product"
+        >
+            Products
         </div>
-      </StyledMenu>
-    </div>
-  );
+        <StyledMenu
+            id="customized-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+        >
+            <div className="flex_product">
+            {data?.categories.map((menu: Category) => {
+                return (<>
+                <div><strong>{menu.name}</strong>
+                {menu?.subCategories.map((sub: any) => {
+                    return (
+                        <StyledMenuItem
+                        // onClick={() => { window.location.pathname = menu.link }}
+                        >
+                        <ListItemText primary={sub["name"]}/>
+                        </StyledMenuItem>
+                    )
+                })}
+                </div>
+            </>)})}
+            </div>
+        </StyledMenu>
+        </div>
+    );
 }
