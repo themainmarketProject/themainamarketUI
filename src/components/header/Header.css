@@ -4,6 +4,7 @@
   flex: 1;
   flex-direction: column;
   background-color: white;
+  color : #0d1d40
 }
 
 .header-top {
@@ -67,7 +68,7 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 6px;
-  background-color: #2f4050;
+  background-color: #0d1d40;
   color: white;
 }
 

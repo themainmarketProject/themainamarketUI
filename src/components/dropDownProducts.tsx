@@ -63,8 +63,6 @@ export default function DropDownProduct () {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const { loading, error, data } = useQuery(GET_CATEGORIES);
     console.log(data);
-
-    // if (loading) return <Loader />;
   
     if (error) return <p>An error occured!</p>;
 

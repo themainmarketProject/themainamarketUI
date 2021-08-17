@@ -49,7 +49,6 @@ class FaceBook extends Component<MyProps, MyState> {
             appId="803177633904696"
             autoLoad={true}
             fields="name,email,picture"
-            // onClick={componentClicked}
             callback={responseFacebook}
           />
         );

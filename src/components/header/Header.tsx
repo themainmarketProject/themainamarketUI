@@ -27,7 +27,7 @@ function Header() {
       </section>
       <section className="header-bottom">
         <section className="header-bottom__phone">999999999</section>
-        <section className="header-bottom__email">market@gmail.com</section>
+        <section className="header-bottom__email">themainmarket7@gmail.com</section>
       </section>
       <hr className="header-top__seperator2" />
       <section className="header-bottom2">

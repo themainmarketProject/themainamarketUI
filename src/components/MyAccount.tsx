@@ -84,7 +84,9 @@ function MyAccount() {
                   <p>ACCOUNT DETAILS</p>
                   <hr className="separator" />
                   <br />
-                  <p>{contact.name}{" "}{contact.surname}</p>
+                  <p>
+                    {contact.name} {contact.surname}
+                  </p>
                   <p>
                     <em className="mail">{contact.email}</em>
                   </p>
@@ -102,8 +104,23 @@ function MyAccount() {
                   <hr className="separator" />
                   <br />
                   <p>Your Default Shipping Address:</p>
-                  <p>{address.data.houseNumber}{", "}{address.data.streetName}</p>
-                  <p>{address.data.city}{" "}{address.data.state}{". "}{address.data.country}</p>
+                  <br />
+                  {address.data ? (
+                    <>
+                      <p className="details">
+                        {address.data.houseNumber}
+                        {", "}
+                        {address.data.streetName}
+                      </p>
+                      <p className="details">
+                        {address.data.city} {address.data.state}
+                        {". "}
+                        {address.data.country}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="details">No Default Shipping Address Yet</p>
+                  )}
                 </div>
               </Card>
               <Card>
