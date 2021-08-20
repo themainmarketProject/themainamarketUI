@@ -1,14 +1,21 @@
-import React from 'react';
-// import { ClipLoader } from 'react-spinners';
+import { useState } from "react";
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
-// const Loader = () => 
-//   <div className='full-page-loader'>
-//     <ClipLoader
-//       sizeUnit={"px"}
-//       size={150}
-//       color={'#3454D1'}
-//       loading={true}
-//     />
-//   </div> 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
-// export default Loader
+const Loader = () => {
+  let [loading, setLoading] = useState(true);
+  let [color, setColor] = useState("#ffffff");
+  return (
+    <div className="sweet-loading">
+      <ClipLoader color={color} loading={loading} css={override} size={150} />
+    </div>
+  );
+};
+
+export default Loader;

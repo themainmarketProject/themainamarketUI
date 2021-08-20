@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const GET_CATEGORIES = gql`
+export const GET_CATEGORIES = gql`
   query {
     categories {
       id
@@ -8,6 +8,10 @@ const GET_CATEGORIES = gql`
       subCategories {
         name
         id
+        products {
+          avatarUrl
+          name
+        }
       }
     }
   }
@@ -15,12 +19,28 @@ const GET_CATEGORIES = gql`
 
 
 // Get products by page number and number per page
-const PRODUCTS = gql`
+export const PRODUCTS = gql`
   query {
-    products(pageNumber: 1, perPage: 3) {
+    products(pageNumber: 1, perPage: 10) {
       id
       name
+      price
       avatarUrl
+    }
+  }
+`;
+
+// Get Subcategories by page number and number per page
+
+export const SUB_CATEGORIES = gql`
+  query {
+    subCategories(pageNumber: 1, perPage: 5) {
+      id
+      name
+      products {
+        id
+        avatarUrl
+      }
     }
   }
 `;

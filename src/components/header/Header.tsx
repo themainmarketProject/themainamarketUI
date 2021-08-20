@@ -6,7 +6,6 @@ import logo from '../../images/logo2.jpeg';
 import './Header.css';
 
 function Header() {
-
   return (
     <section className="header">
       <section className="header-top">
