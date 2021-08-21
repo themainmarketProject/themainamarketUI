@@ -57,12 +57,22 @@ const Reviews = () => {
   ));
   console.log(content);
   const settings = {
-    dots: true,
+    // dots: true,
     arrows: true,
     infinite: true,
     speed: 1500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    nextArrow: (
+      <div>
+        <div className="next-slick-arrow">⫸</div>
+      </div>
+    ),
+    prevArrow: (
+      <div>
+        <div className="prev-slick-arrow">⫷</div>
+      </div>
+    ),
   };
     return (
       <div className="review-wrapper">

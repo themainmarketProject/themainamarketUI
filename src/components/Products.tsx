@@ -7,6 +7,8 @@ import Slider from "./Slider";
 import Reviews from "./Reviews";
 import SlickDisplay from "./SlickSlider";
 import Featured from "./FeatureProducts";
+import Newsletter from "./NewsLetter";
+import Footer from "./footer/Footer";
 
 interface Category {
   id: string;
@@ -47,7 +49,7 @@ const Products = () => {
       {retreiving ? (
         <Loader />
       ) : (
-        <>
+        <div className="product-background">
           <Slider />
           <div className="products-container">
             <div className="content-hot-sales">
@@ -89,8 +91,10 @@ const Products = () => {
             <Featured products={data3?.products} />
           </div>
           <Reviews />
-        </>
+          <Newsletter />
+        </div>
       )}
+      <Footer />
     </>
   );
 };
