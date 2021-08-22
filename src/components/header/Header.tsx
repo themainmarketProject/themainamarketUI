@@ -4,8 +4,25 @@ import DropDownProduct from "../dropDownProducts";
 import SearchIcon from '@material-ui/icons/Search';
 import logo from '../../images/logo2.jpeg';
 import './Header.css';
+import { ApolloError } from "apollo-client";
 
-function Header() {
+interface Category {
+  id: string;
+  name: string;
+  subCategories: [{ id: string; name: string }];
+}
+
+type Categories = {
+  categories: Category[];
+};
+
+interface Cat {
+  loading1: boolean;
+  error1: ApolloError | undefined;
+  data1: Categories;
+}
+
+function Header(props: Cat) {
   return (
     <section className="header">
       <section className="header-top">
@@ -30,7 +47,7 @@ function Header() {
       </section>
       <hr className="header-top__seperator2" />
       <section className="header-bottom2">
-      <DropDownProduct />
+        <DropDownProduct {...props}/>
       </section>
     </section>
   );

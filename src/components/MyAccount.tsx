@@ -6,6 +6,7 @@ import getToken from "../lib/getToken";
 import { Paper, Card } from "./styled/index";
 import "./MyAccount.css";
 import { Link } from "react-router-dom";
+import { ApolloError } from "apollo-client";
 
 interface Contact {
     email: string,
@@ -22,56 +23,78 @@ interface Address {
     country: string;
   };
 }
+interface Category {
+  id: string;
+  name: string;
+  subCategories: [{ id: string; name: string }];
+}
 
-function MyAccount() {
-    const [contact, setContact] = useState<Contact>({
-      email: "",
-      name: "",
-      surname: "",
-    });
+interface Data {
+  loading1: boolean;
+  error1: ApolloError | undefined;
+  data1: Categories;
+}
 
-    const [address, setAddress] = useState<Address>({
-      data: {
-        houseNumber: "",
-        streetName: "",
-        city: "",
-        state: "",
-        country: "",
-      },
-    });
+type Categories = {
+  categories: Category[];
+};
+function MyAccount(props: Data) {
+  const [contact, setContact] = useState<Contact>({
+    email: "",
+    name: "",
+    surname: "",
+  });
 
-    useEffect(() => {
-        let decode = getToken("myToken");
-        if (decode === "user") {
-        setContact({...contact, name: "user",});
-        } else {
-        decode = jwt_decode(decode!);
-        let data: any = decode;
+  const [address, setAddress] = useState<Address>({
+    data: {
+      houseNumber: "",
+      streetName: "",
+      city: "",
+      state: "",
+      country: "",
+    },
+  });
+
+  useEffect(() => {
+    let decode = getToken("myToken");
+    if (decode === "user") {
+      setContact({ ...contact, name: "user" });
+    } else {
+      decode = jwt_decode(decode!);
+      let data: any = decode;
+      console.log(data);
+      let obj = {
+        email:
+          data[
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+          ],
+        name: data[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+        ],
+        surname:
+          data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"],
+      };
+      setContact(obj);
+    }
+    const token = localStorage.getItem("myToken");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    console.log(token);
+    fetch("http://mainmarketapi.herokuapp.com/api/Contact/get-user-contact", {
+      headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
-        let obj = {
-            email: data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
-            name: data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-            surname: data["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"]
-        };
-        setContact(obj);
-        }
-        const token = localStorage.getItem("myToken");
-        const headers = { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-        };
-        console.log(token);
-        fetch("http://mainmarketapi.herokuapp.com/api/Contact/get-user-contact", { headers })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            setAddress(data)
-        });
-    }, []);
+        setAddress(data);
+      });
+  }, []);
 
   return (
     <div>
-      <Header />
+      <Header {...props}/>
       <div className="content">
         <SideBar />
         <Paper>

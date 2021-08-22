@@ -9,6 +9,8 @@ import SlickDisplay from "./SlickSlider";
 import Featured from "./FeatureProducts";
 import Newsletter from "./NewsLetter";
 import Footer from "./footer/Footer";
+import { CategoryRounded } from "@material-ui/icons";
+import { ApolloError } from "apollo-client";
 
 interface Category {
   id: string;
@@ -16,36 +18,62 @@ interface Category {
   subCategories: [{ id: string; name: string }];
 }
 
-interface subCatgory {
+interface subCategory {
   id: string;
   name: string;
   products: [{ id: string; name: string; avatarUrl: string }];
 }
 
-const Products = () => {
-  const {
-    loading: loading1,
-    error: error1,
-    data: data1,
-  } = useQuery(GET_CATEGORIES);
-  const {
-    loading: loading2,
-    error: error2,
-    data: data2,
-  } = useQuery(SUB_CATEGORIES);
-  const { loading: loading3, error: error3, data: data3 } = useQuery(PRODUCTS);
-  console.log(loading1, loading2, loading3);
-  const retreiving = loading1
+interface Cat {
+  loading1: boolean;
+  error1: string;
+  data1: Category;
+}
+
+interface Products {
+  id: string;
+  name: string;
+  price: number;
+  avatarUrl: string;
+}
+
+interface Data {
+  category: {
+    loading1: boolean;
+    error1: ApolloError | undefined;
+    data1: Categories;
+  };
+  subCategory: {
+    loading2: boolean;
+    error2: ApolloError | undefined;
+    data2: Categories;
+  };
+
+  product: {
+    loading3: boolean;
+    error3: ApolloError | undefined;
+    data3: Categories;
+  };
+}
+
+type Categories = {
+  categories: Category[];
+  subCategories: subCategory[];
+  products: Products[];
+}
+
+const Products = (props: Data) => {
+  const { category, subCategory, product } = props;
+  const retreiving = category?.loading1
     ? true
-    : loading2
+    : subCategory?.loading2
     ? true
-    : loading3
+    : product?.loading3
     ? true
     : false;
-  console.log(error1, data1);
   return (
     <>
-      <Header />
+      <Header { ...category }/>
       {retreiving ? (
         <Loader />
       ) : (
@@ -61,14 +89,14 @@ const Products = () => {
               Check out most popular categories
             </h2>
             <div className="category-grid">
-              {data2?.subCategories.map((item: subCatgory) => (
+              {subCategory?.data2?.subCategories.map((item: subCategory) => (
                 <div className="cat-sales" key={item.id}>
                   <img src={item.products[0].avatarUrl} alt="" />
                 </div>
               ))}
             </div>
             <div className="category-list">
-              {data1?.categories.map((category: Category) => (
+              {category?.data1?.categories.map((category: Category) => (
                 <div className="category-column">
                   <h3 key={category.id}>{category.name}</h3>
                   <ul>
@@ -82,13 +110,13 @@ const Products = () => {
             <h2 className="category-header">
               Check out most popular categories
             </h2>
-            <SlickDisplay products={data3?.products} />
+            <SlickDisplay products={product?.data3?.products} />
             <div className="content-hot-sales">
               <div className="hot-sales2"></div>
               <div className="hot-sales2"></div>
             </div>
             <h2 className="category-header">Featured Products</h2>
-            <Featured products={data3?.products} />
+            <Featured products={product?.data3?.products} />
           </div>
           <Reviews />
           <Newsletter />

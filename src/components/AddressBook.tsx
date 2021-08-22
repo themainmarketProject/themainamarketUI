@@ -12,33 +12,49 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Country, State } from "country-state-city";
 import useForm from "../lib/useForm";
 import Button from "@material-ui/core/Button";
+import { ApolloError } from "apollo-client";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        padding: '150px 0',
+      padding: "150px 0",
       "& > *": {
         margin: theme.spacing(3),
-
       },
     },
     input: {
       width: "33em",
     },
     select: {
-        width: "15em"
+      width: "15em",
     },
     formControl: {
       margin: theme.spacing(3),
       minWidth: 120,
     },
-    header : {
-        margin: "20px auto",
-    }
+    header: {
+      margin: "20px auto",
+    },
   })
 );
 
-export default function AddressBook() {
+interface Category {
+  id: string;
+  name: string;
+  subCategories: [{ id: string; name: string }];
+}
+
+interface Data {
+  loading1: boolean;
+  error1: ApolloError | undefined;
+  data1: Categories;
+}
+
+type Categories = {
+  categories: Category[];
+};
+
+export default function AddressBook(props: Data) {
   const [name, setName] = React.useState("Composed TextField");
   const { inputs, handleChange, resetForm } = useForm({
     houseNumber: "",
@@ -70,7 +86,7 @@ export default function AddressBook() {
 
   return (
     <div>
-      <Header />
+      <Header {...props} />
       <div className="content">
         <SideBar />
         <Paper>
